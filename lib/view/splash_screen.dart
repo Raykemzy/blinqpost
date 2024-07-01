@@ -1,5 +1,5 @@
 import 'package:blinqpost/utils/colors.dart';
-import 'package:blinqpost/view/users/pages/bottom_nav_bar_view.dart';
+import 'package:blinqpost/view/bottom_nav_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
