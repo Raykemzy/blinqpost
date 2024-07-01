@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.primaryDark,
       body: Center(
         child: Text(
-          "BlinqPost",
+          "BP",
           style: TextStyle(
             fontSize: 54.sp,
             fontWeight: FontWeight.w900,
