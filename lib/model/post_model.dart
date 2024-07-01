@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class Post {
   final String description;
   final String id;
@@ -117,25 +115,4 @@ class Post {
         ' video: $video'
         '}';
   }
-}
-
-///For testing purposes
-Post generateRandomPost() {
-  // const uuid = Uuid();
-  final random = Random();
-
-  return Post(
-    description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    id: random
-        .nextInt(200)
-        .toString(), //"123e4567-e89b-12d3-a456-426614174000",
-    link: "https://example.com/post/123",
-    noMedia: false,
-    thumbnail: "https://www.w3schools.com/html/mov_bbb.mp4",
-    timestamp: 1653513552,
-    userId: "123e4567-e89b-12d3-a456-426614174001",
-    username: "John Doe",
-    video: true,
-  );
 }
