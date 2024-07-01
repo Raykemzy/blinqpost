@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 abstract class AppColors {
   late Color primaryColor;
   late Color borderColor;
+  late Color profileIconColor;
   late Color primaryTextColor;
   late Color selectedLabelColor;
   late Color unselectedLabelColor;
@@ -31,15 +32,20 @@ class LightColors implements AppColors {
 
   @override
   Color unselectedLabelColor = _primaryColor;
+  
+  @override
+  Color profileIconColor = _white;
 }
 
 class DarkColors implements AppColors {
+  static const _primaryColor = Color(0xFF0D1F23);
+
   static const _lightGrey = Color(0xFFAFB3B7);
 
   static const _white = Colors.white;
 
   @override
-  Color primaryColor = const Color(0xFF0D1F23);
+  Color primaryColor = _primaryColor;
 
   @override
   Color borderColor = _lightGrey;
@@ -52,6 +58,9 @@ class DarkColors implements AppColors {
 
   @override
   Color unselectedLabelColor = _white;
+  
+  @override
+  Color profileIconColor = _primaryColor;
 }
 
 final appColorProvider = Provider<AppColors>((ref) {

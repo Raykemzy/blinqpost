@@ -13,7 +13,13 @@ import 'package:timeago/timeago.dart' as timeago;
 abstract class PostWidget extends StatefulWidget {
   final Post post;
   final VoidCallback likePost;
-  const PostWidget({super.key, required this.post, required this.likePost});
+  final VoidCallback repost;
+  const PostWidget({
+    super.key,
+    required this.post,
+    required this.likePost,
+    required this.repost,
+  });
 
   ///Subclasses would override this method for custom content.
   ///Useful for when content is of different media type.
@@ -61,7 +67,16 @@ class _PostWidgetState extends State<PostWidget> {
               15.horizontalSpace,
               const Icon(CupertinoIcons.chat_bubble, size: 20),
               15.horizontalSpace,
-              const Icon(CupertinoIcons.repeat, size: 20),
+              InkWell(
+                onTap: widget.repost,
+                child: Icon(
+                  CupertinoIcons.repeat,
+                  size: 20,
+                  color: widget.post.isReposted ? Colors.green : null,
+                ),
+              ),
+              5.horizontalSpace,
+              Text(widget.post.repostCount.toString()),
             ],
           )
         ],
@@ -71,8 +86,12 @@ class _PostWidgetState extends State<PostWidget> {
 }
 
 class TextPostContainer extends PostWidget {
-  const TextPostContainer(
-      {super.key, required super.post, required super.likePost});
+  const TextPostContainer({
+    super.key,
+    required super.post,
+    required super.likePost,
+    required super.repost,
+  });
 
   @override
   Widget buildContent(BuildContext context) {
@@ -81,8 +100,12 @@ class TextPostContainer extends PostWidget {
 }
 
 class ImagePostContainer extends PostWidget {
-  const ImagePostContainer(
-      {super.key, required super.post, required super.likePost});
+  const ImagePostContainer({
+    super.key,
+    required super.post,
+    required super.likePost,
+    required super.repost,
+  });
 
   @override
   Widget buildContent(BuildContext context) {
@@ -95,8 +118,12 @@ class ImagePostContainer extends PostWidget {
 }
 
 class VideoPostContainer extends PostWidget {
-  const VideoPostContainer(
-      {super.key, required super.post, required super.likePost});
+  const VideoPostContainer({
+    super.key,
+    required super.post,
+    required super.likePost,
+    required super.repost,
+  });
 
   @override
   Widget buildContent(BuildContext context) {

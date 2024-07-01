@@ -1,5 +1,6 @@
 import 'package:blinqpost/model/post_model.dart';
 import 'package:blinqpost/utils/enums.dart';
+import 'package:blinqpost/utils/extensions.dart';
 import 'package:blinqpost/view-model/post_view_model.dart';
 import 'package:blinqpost/view/posts/widgets/post_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,19 +28,25 @@ class PostList extends ConsumerWidget {
       separatorBuilder: (ctx, i) => SizedBox(height: 20.h),
       itemBuilder: (ctx, i) => _getPostWidget(
         posts[i],
-        () => ref.read(postsProvider.notifier).likePost(posts[i].id),
+        likePost: () => ref.read(postsProvider.notifier).likePost(posts[i].id),
+        repost: () {
+          ref.read(postsProvider.notifier).repost(posts[i].id);
+          final isRepostedByUser = posts[i].isReposted;
+          context.hideSnackBar();
+          context.showSnackbar(text: !isRepostedByUser ? "You reposted" : "Repost undone");
+        },
       ),
     );
   }
 
-  Widget _getPostWidget(Post post, VoidCallback likePost) {
+  Widget _getPostWidget(Post post, {required VoidCallback likePost, required VoidCallback repost}) {
     PostWidget? postWidget;
     if (post.isText) {
-      postWidget = TextPostContainer(post: post, likePost: likePost);
+      postWidget = TextPostContainer(post: post, likePost: likePost, repost: repost);
     } else if (post.isImage) {
-      postWidget = ImagePostContainer(post: post, likePost: likePost);
+      postWidget = ImagePostContainer(post: post, likePost: likePost, repost: repost);
     } else {
-      postWidget = VideoPostContainer(post: post, likePost: likePost);
+      postWidget = VideoPostContainer(post: post, likePost: likePost, repost: repost);
     }
     return postWidget;
   }

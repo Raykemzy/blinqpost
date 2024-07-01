@@ -9,7 +9,9 @@ class Post {
   final String username;
   final dynamic video;
   final int likeCount;
+  final int repostCount;
   final bool isLiked;
+  final bool isReposted;
 
   Post({
     required this.description,
@@ -22,7 +24,9 @@ class Post {
     required this.username,
     required this.video,
     this.likeCount = 0,
+    this.repostCount = 0,
     this.isLiked = false,
+    this.isReposted = false,
   });
 
   factory Post.fromMap(Map<String, dynamic> data) {
@@ -67,7 +71,9 @@ class Post {
     String? username,
     dynamic video,
     int? likeCount,
+    int? repostCount,
     bool? isLiked,
+    bool? isReposted,
   }) {
     return Post(
       description: description ?? this.description,
@@ -81,6 +87,8 @@ class Post {
       video: video ?? this.video,
       likeCount: likeCount ?? this.likeCount,
       isLiked: isLiked ?? this.isLiked,
+      repostCount: repostCount ?? this.repostCount,
+      isReposted: isReposted ?? this.isReposted,
     );
   }
 

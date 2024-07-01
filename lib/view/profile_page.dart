@@ -1,5 +1,6 @@
 import 'package:blinqpost/utils/colors.dart';
 import 'package:blinqpost/view-model/theme_notifier.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,6 +20,11 @@ class ProfilePage extends ConsumerWidget {
               CircleAvatar(
                 backgroundColor: appColor.borderColor,
                 radius: 100,
+                child: Icon(
+                  CupertinoIcons.person,
+                  size: 100,
+                  color: appColor.profileIconColor,
+                ),
               ),
               50.verticalSpace,
               Row(
@@ -32,7 +38,9 @@ class ProfilePage extends ConsumerWidget {
                         onChanged: (v) {
                           final isDarkMode = ref.watch(isDarkModeProvider);
                           final notifier = ref.read(themeModeProvider.notifier);
-                          isDarkMode ? notifier.switchToLightMode() : notifier.switchToDarkMode();
+                          isDarkMode
+                              ? notifier.switchToLightMode()
+                              : notifier.switchToDarkMode();
                         },
                       );
                     },

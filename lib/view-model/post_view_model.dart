@@ -49,6 +49,26 @@ class PostNotifier extends AutoDisposeNotifier<PostState> {
       print(e.toString());
     }
   }
+
+  void repost(String postId) {
+    try {
+      final postIndex = state.posts.indexWhere((post) => post.id == postId);
+      if (postIndex >= 0) {
+        final post = state.posts[postIndex];
+        final updatedPost = post.copyWith(
+          repostCount: post.isReposted ? post.repostCount - 1 : post.repostCount + 1,
+          isReposted: !post.isReposted,
+        );
+
+        final updatedPosts = List<Post>.from(state.posts);
+        updatedPosts[postIndex] = updatedPost;
+
+        state = state.copyWith(posts: updatedPosts);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
 
 class PostState {
